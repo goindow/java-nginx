@@ -57,7 +57,7 @@ chmod +x /usr/local/bin/docker-compose
 ```shell
 # 1.启动 java web app
 #   - cd 到 wepapps 目录，新建 ${appName} 目录，拉取 ${appName} jar|war 包文件
-#   - 使用生成器脚本，生成 Dockerfile、docker-compose.yml
+#   - 编写 Dockerfile、docker-compose.yml
 #   - 启动 ${appName} 容器
 docker-compose up -d --build
 
