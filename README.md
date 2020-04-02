@@ -1,5 +1,5 @@
 # java-nginx
-使用 docker-compose 编排 java web apps 和 nginx 容器，支持多应用
+使用 docker-compose 编排 java webapps 和 nginx 容器，支持多应用
 
 ## 目录说明
 - nginx/logs/, 虚拟主机日志，如果有多个应用，使用子目录区分
@@ -10,7 +10,7 @@
 ## 镜像说明
 - nginx，官方 nginx:1.15，使用 docker-compose.yml 管理编排容器
 - $app_name，基于 java:8 的自定义镜像，每个应用有自己的 Dockerfile 文件，同时使用 docker-compose.yml 管理编排容器
-- nginx 和 java web apps 镜像分开管理（nginx 一个容器，每个 java web app 自己一个容器）
+- nginx 和 java webapps 镜像分开管理（nginx 一个容器，每个 java web app 自己一个容器），避免多应用更新重启互相干扰
 
 ## docker-compose.yml
 - 如果需要时间同步，将 localtime 备注开启（macos 无效，需要替换为对应的文件）
@@ -24,11 +24,9 @@
 - nginx.conf，log 日志重定向
 - java，使用 -Djava.security.egd=file:/dev/./urandom 选项，优化随机数产生效率，加快 app 启动
 
-## webapps，应用 Dockerfile、docker-compose.yml 生成器
-> 根据包文件名 \*.war|jar 自动生成 docker 相关配置文件
-```shell
-// todo: shell
-```
+## webapps，应用 Dockerfile、docker-compose.yml 说明
+- 每个 java web app 一个镜像，需要自定义 Dockerfile
+- 每个 images 使用 docker-compose.yml 编排，如果是多应用，需要手动修改映射主机端口，避免端口被占用 
 
 ## 使用
 1. 安装 docker-ce
