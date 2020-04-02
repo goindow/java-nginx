@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+
+  app:
+    build: ./
+    ports:
+      - "8080:8080"
+#    restart: always
+#    volumes:
+#      - /etc/localtime:/etc/localtime
+#    networks:
+#      - custom
+
+#networks:
+#  custom:
+#    ipam:
+#      config:
+#        - subnet: 192.168.110.0/24
+#          gateway: 192.168.110.1
