@@ -18,11 +18,15 @@
 
 ## nginx、java 配置优化
 > nginx、java 部分配置优化如下，请根据机器配置自行调整，相关文件及目录已挂载
-- nginx.conf，client_max_body_size 1024m，大文件上传
-- nginx.conf，worker_processes 4
-- nginx.conf，gzip 相关已开启
-- nginx.conf，log 日志重定向
-- java，使用 -Djava.security.egd=file:/dev/./urandom 选项，优化随机数产生效率，加快 app 启动
+- nginx.conf
+  - client_max_body_size 1024m，大文件上传
+  - proxy_read_timeout 240s，慢脚本支持 for poxy（java crontab etc.）
+  - fastcgi_read_timeout 240s，慢脚本支持 for fastcgi（php-fpm crotab etc.）
+  - worker_processes 4
+  - gzip 相关已开启
+  - log 日志重定向
+- java
+  - 使用 -Djava.security.egd=file:/dev/./urandom 选项，优化随机数产生效率，加快 app 启动
 
 ## webapps，应用 Dockerfile、docker-compose.yml 说明
 - 每个 java web app 一个镜像，需要自定义 Dockerfile
