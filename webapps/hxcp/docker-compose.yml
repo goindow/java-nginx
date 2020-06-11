@@ -7,8 +7,8 @@ services:
     ports:
       - "8080:8080"
 #    restart: always
-#    volumes:
-#      - /etc/localtime:/etc/localtime
+    volumes:
+    - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
 #    networks:
 #      - custom
 
