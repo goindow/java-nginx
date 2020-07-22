@@ -41,8 +41,20 @@ yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y docker-ce
 ```
+2. 配置容器日志
+```shell
+cat > /etc/docker/daemon.json << EOF
+{
+    "log-driver": "json-file",
+     "log-opts": {
+        "max-size": "50m",
+        "max-file": "1"
+     }
+}
+EOF
+```
 
-2. 启动 docker
+3. 启动 docker
 ```shell
 # centos7+
 systemctl enable docker    # 开机自启
@@ -51,13 +63,13 @@ systemctl start docker     # 启动
 docker -v
 ```
 
-3. 安装 docker-compose
+4. 安装 docker-compose
 ```shell
 curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
-4. 启动 java-nginx
+5. 启动 java-nginx
 ```shell
 # 1.启动 java web app
 #   - cd 到 wepapps 目录，新建 ${appName} 目录，拉取 ${appName} jar|war 包文件
