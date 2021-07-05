@@ -41,7 +41,14 @@ yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y docker-ce
 ```
-2. 配置容器日志
+
+2. 安装 docker-compose
+```shell
+curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+```
+
+3. 配置容器日志
 ```shell
 cat > /etc/docker/daemon.json << EOF
 {
@@ -54,7 +61,14 @@ cat > /etc/docker/daemon.json << EOF
 EOF
 ```
 
-3. 启动 docker
+4. 配置 nginx 日志切割
+```shell
+# chmod +x sh/docker_nginx_log_cutting.sh
+# crontab
+0 0 * * * /data/java-nginx/sh/docker_nginx_log_cutting.sh nginx_nginx_1 /data/java-nginx/nginx/logs/ &> /dev/null
+```
+
+5. 启动 docker
 ```shell
 # centos7+
 systemctl enable docker    # 开机自启
@@ -63,13 +77,8 @@ systemctl start docker     # 启动
 docker -v
 ```
 
-4. 安装 docker-compose
-```shell
-curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-```
 
-5. 启动 java-nginx
+6. 启动 java-nginx
 ```shell
 # 1.启动 java web app
 #   - cd 到 wepapps 目录，新建 ${appName} 目录，拉取 ${appName} jar|war 包文件
