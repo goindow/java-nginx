@@ -8,7 +8,7 @@
 - webapps/{$app_name}，应用目录
 
 ## 镜像说明
-- nginx，官方 nginx:1.15，使用 docker-compose.yml 管理编排容器
+- nginx，官方 nginx:1.17.3，使用 docker-compose.yml 管理编排容器
 - $app_name，基于 java:8 的自定义镜像，每个应用有自己的 Dockerfile 文件，同时使用 docker-compose.yml 管理编排容器
 - nginx 和 java webapps 镜像分开管理（nginx 一个容器，每个 java web app 自己一个容器），避免多应用更新重启互相干扰
 
