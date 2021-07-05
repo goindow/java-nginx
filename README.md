@@ -28,6 +28,10 @@
 - java
   - 使用 -Djava.security.egd=file:/dev/./urandom 选项，优化随机数产生效率，加快 app 启动
 
+## docker_nginx_log_cutting.sh
+- 自动切割打包 ./nginx/logs/ 下的所有项目
+- 保存近 14 天的日志压缩包
+
 ## webapps，应用 Dockerfile、docker-compose.yml 说明
 - 每个 java web app 一个镜像，需要自定义 Dockerfile
 - 每个 images 使用 docker-compose.yml 编排，如果是多应用，需要手动修改映射主机端口，避免端口被占用 
